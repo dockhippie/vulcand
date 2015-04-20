@@ -23,4 +23,4 @@ EXPOSE 8181 8182
 
 WORKDIR /docker
 ENTRYPOINT ["manage"]
-CMD ["bash"]
+CMD ["start"]
