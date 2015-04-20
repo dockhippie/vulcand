@@ -1,24 +1,24 @@
-# Golang
+# Vulcand
 
-These are docker images for Golang running on an
+These are docker images for Vulcand running on an
 [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/)
 
 
 ## Usage
 
 ```
-docker run -ti --name golang webhippie/golang:latest bash
+docker run -ti --name vulcand webhippie/vulcand:latest bash
 
 # Execute this for further available commands
-docker exec -ti golang manage help
+docker exec -ti vulcand manage help
 ```
 
 
 ## Versions
 
-* [latest](https://github.com/dockhippie/golang/tree/master)
-  available as ```webhippie/golang:latest``` at
-  [Docker Hub](https://registry.hub.docker.com/u/webhippie/golang/)
+* [latest](https://github.com/dockhippie/vulcand/tree/master)
+  available as ```webhippie/vulcand:latest``` at
+  [Docker Hub](https://registry.hub.docker.com/u/webhippie/vulcand/)
 
 
 ## Available environment variables
