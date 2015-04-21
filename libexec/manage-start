@@ -9,6 +9,7 @@ if manage-running
 then
   echo "Service is already running"
 else
+  trap "manage-stop" SIGTERM
   STARTCMD="/usr/bin/vulcand -port=8181 -apiPort=8182"
 
   if [ -n "${VULCAND_API_INTERFACE}" ]
