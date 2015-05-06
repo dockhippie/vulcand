@@ -8,7 +8,7 @@ The current container size is ```75.9 MB```
 ## Usage
 
 ```
-docker run -ti --name vulcand webhippie/vulcand:latest bash
+docker run -ti --name vulcand webhippie/vulcand:latest
 ```
 
 
