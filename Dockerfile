@@ -1,11 +1,11 @@
 FROM webhippie/alpine:latest
 MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
-ENV GOPATH /usr
-
 ENV VULCAND_PATH github.com/mailgun/vulcand
 ENV VULCAND_REPO https://${VULCAND_PATH}.git
 ENV VULCAND_BRANCH master
+
+ENV GOPATH /usr
 
 RUN apk-install build-base git go && \
   git clone -b ${VULCAND_BRANCH} ${VULCAND_REPO} ${GOPATH}/src/${VULCAND_PATH} && \
