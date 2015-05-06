@@ -9,9 +9,6 @@ The cuurrent container size is ```46.48 MB```
 
 ```
 docker run -ti --name vulcand webhippie/vulcand:latest bash
-
-# Execute this for further available commands
-docker exec -ti vulcand manage help
 ```
 
 
@@ -45,23 +42,6 @@ ENV VULCAND_SERVER_READTIMEOUT 1m0s
 ENV VULCAND_SERVER_WRITETIMEOUT 1m0s
 ENV VULCAND_STATSD_ADDR
 ENV VULCAND_STATSD_PREFIX
-```
-
-
-## Available management commands
-
-```bash
-Usage: manage <command> [<args>]
-
-Some useful manage commands are:
-   bash      Start a shell on container
-   commands  List all available sub commands
-   pid       Return the process id
-   prepare   Prepare environment
-   reload    Reload the main process
-   running   Check if main process is running
-   start     Start the main process
-   stop      Stop the main process
 ```
 
 
