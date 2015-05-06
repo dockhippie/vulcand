@@ -2,7 +2,7 @@
 
 These are docker images for [Vulcand](https://github.com/mailgun/vulcand) running on an
 [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
-The cuurrent container size is ```75.9 MB```
+The current container size is ```75.9 MB```
 
 
 ## Usage
