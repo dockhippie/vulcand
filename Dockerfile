@@ -7,7 +7,11 @@ ENV VULCAND_BRANCH master
 
 ENV GOPATH /usr
 
-RUN apk add --update build-base git go && \
+RUN apk update && \
+  apk add \
+    build-base \
+    git \
+    go && \
   git clone -b ${VULCAND_BRANCH} ${VULCAND_REPO} ${GOPATH}/src/${VULCAND_PATH} && \
   go get ${VULCAND_PATH}/... && \
   go install ${VULCAND_PATH} && \
