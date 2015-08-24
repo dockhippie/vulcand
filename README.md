@@ -1,13 +1,17 @@
 # Vulcand
 
+[![](https://badge.imagelayers.io/webhippie/vulcand:latest.svg)](https://imagelayers.io/?images=webhippie/vulcand:latest 'Get your own badge on imagelayers.io')
+
 These are docker images for [Vulcand](https://github.com/mailgun/vulcand) running on an
 [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
 
 
 ## Usage
 
-```
-docker run -ti --name vulcand webhippie/vulcand:latest
+```bash
+docker run -ti \
+  --name vulcand \
+  webhippie/vulcand:latest
 ```
 
 
@@ -41,6 +45,20 @@ ENV VULCAND_SERVER_READTIMEOUT 1m0s
 ENV VULCAND_SERVER_WRITETIMEOUT 1m0s
 ENV VULCAND_STATSD_ADDR
 ENV VULCAND_STATSD_PREFIX
+```
+
+
+## Inherited environment variables
+
+```bash
+ENV LOGSTASH_ENABLED false
+ENV LOGSTASH_HOST logstash
+ENV LOGSTASH_PORT 5043
+ENV LOGSTASH_CA /etc/ssl/logstash/certs/ca.pem # As string or filename
+ENV LOGSTASH_CERT /etc/ssl/logstash/certs/cert.pem # As string or filename
+ENV LOGSTASH_KEY /etc/ssl/logstash/private/cert.pem # As string or filename
+ENV LOGSTASH_TIMEOUT 15
+ENV LOGSTASH_OPTS
 ```
 
 

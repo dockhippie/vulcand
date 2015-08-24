@@ -89,46 +89,22 @@ fi
 
 if [ -n "${VULCAND_CERTPATH}" ]
 then
-  if [ -f "${VULCAND_CERTPATH}" ]
-  then
-    STARTCMD="${STARTCMD} -certPath=${VULCAND_CERTPATH}"
-  else
-    echo -e "${VULCAND_CERTPATH}" >| /tmp/vulcand.crt
-    STARTCMD="${STARTCMD} -certPath=/tmp/vulcand.crt"
-  fi
+  STARTCMD="${STARTCMD} -certPath=${VULCAND_CERTPATH}"
 fi
 
 if [ -n "${VULCAND_ETCD_CAFILE}" ]
 then
-  if [ -f "${VULCAND_ETCD_CAFILE}" ]
-  then
-    STARTCMD="${STARTCMD} -etcdCaFile=${VULCAND_ETCD_CAFILE}"
-  else
-    echo -e "${VULCAND_ETCD_CAFILE}" >| /tmp/ca.crt
-    STARTCMD="${STARTCMD} -etcdCaFile=/tmp/ca.crt"
-  fi
+  STARTCMD="${STARTCMD} -etcdCaFile=${VULCAND_ETCD_CAFILE}"
 fi
 
 if [ -n "${VULCAND_ETCD_CERTFILE}" ]
 then
-  if [ -f "${VULCAND_ETCD_CERTFILE}" ]
-  then
-    STARTCMD="${STARTCMD} -etcdCertFile=${VULCAND_ETCD_CERTFILE}"
-  else
-    echo -e "${VULCAND_ETCD_CERTFILE}" >| /tmp/etcd.crt
-    STARTCMD="${STARTCMD} -etcdCertFile=/tmp/etcd.crt"
-  fi
+  STARTCMD="${STARTCMD} -etcdCertFile=${VULCAND_ETCD_CERTFILE}"
 fi
 
 if [ -n "${VULCAND_ETCD_KEYFILE}" ]
 then
-  if [ -f "${VULCAND_ETCD_KEYFILE}" ]
-  then
-    STARTCMD="${STARTCMD} -etcdKeyFile=${VULCAND_ETCD_KEYFILE}"
-  else
-    echo -e "${VULCAND_ETCD_KEYFILE}" >| /tmp/etcd.key
-    STARTCMD="${STARTCMD} -etcdKeyFile=/tmp/etcd.key"
-  fi
+  STARTCMD="${STARTCMD} -etcdKeyFile=${VULCAND_ETCD_KEYFILE}"
 fi
 
 exec ${STARTCMD}

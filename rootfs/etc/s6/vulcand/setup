@@ -1,1 +1,73 @@
 #!/bin/bash
+
+declare -x VULCAND_ETCD
+declare -x VULCAND_ETCD_KEY
+declare -x VULCAND_ETCD_CAFILE
+declare -x VULCAND_ETCD_CERTFILE
+declare -x VULCAND_ETCD_KEYFILE
+declare -x VULCAND_CERTPATH
+declare -x ETCDCTL_COMMAND
+
+if [ -n "${VULCAND_ETCD}" ]
+then
+  VULCAND_ETCD="http://etcd:2379"
+fi
+
+if [ -n "${VULCAND_ETCD_KEY}" ]
+then
+  VULCAND_ETCD_KEY="vulcand"
+fi
+
+if [ -z "${ETCDCTL_COMMAND}" ]
+then
+  ETCDCTL_COMMAND="/usr/bin/etcdctl --peers=${VULCAND_ETCD}"
+else
+  ETCDCTL_COMMAND="${ETCDCTL_COMMAND} --peers=${VULCAND_ETCD}"
+fi
+
+if [ -n "${VULCAND_ETCD_CAFILE}" ]
+then
+  if [ ! -f "${VULCAND_ETCD_CAFILE}" ]
+  then
+    echo -e "${VULCAND_ETCD_CAFILE}" >| /tmp/ca.crt
+    VULCAND_ETCD_CAFILE="/tmp/ca.crt"
+  fi
+
+  ETCDCTL_COMMAND="${ETCDCTL_COMMAND} --ca-file=${VULCAND_ETCD_CAFILE}"
+fi
+
+if [ -n "${VULCAND_ETCD_CERTFILE}" ]
+then
+  if [ ! -f "${VULCAND_ETCD_CERTFILE}" ]
+  then
+    echo -e "${VULCAND_ETCD_CERTFILE}" >| /tmp/etcd.crt
+    VULCAND_ETCD_CERTFILE="/tmp/etcd.crt"
+  fi
+
+  ETCDCTL_COMMAND="${ETCDCTL_COMMAND} --cert-file=${VULCAND_ETCD_CERTFILE}"
+fi
+
+if [ -n "${VULCAND_ETCD_KEYFILE}" ]
+then
+  if [ ! -f "${VULCAND_ETCD_KEYFILE}" ]
+  then
+    echo -e "${VULCAND_ETCD_KEYFILE}" >| /tmp/etcd.key
+    VULCAND_ETCD_KEYFILE="/tmp/etcd.key"
+  fi
+
+  ETCDCTL_COMMAND="${ETCDCTL_COMMAND} --key-file=${VULCAND_ETCD_KEYFILE}"
+fi
+
+if [ -n "${VULCAND_CERTPATH}" ]
+then
+  if [ ! -f "${VULCAND_CERTPATH}" ]
+  then
+    echo -e "${VULCAND_CERTPATH}" >| /tmp/vulcand.crt
+    VULCAND_CERTPATH="/tmp/vulcand.crt"
+  fi
+fi
+
+if ! ${ETCDCTL_COMMAND} ls /${VULCAND_ETCD_KEY} > /dev/null 2>&1
+then
+  ${ETCDCTL_COMMAND} mkdir /${VULCAND_ETCD_KEY}
+fi
