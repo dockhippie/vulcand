@@ -8,7 +8,7 @@ declare -x VULCAND_ETCD_KEYFILE
 declare -x VULCAND_CERTPATH
 declare -x ETCDCTL_COMMAND
 
-if [ -n "${VULCAND_ETCD}" ]
+if [ -z "${VULCAND_ETCD}" ]
 then
   VULCAND_ETCD="http://etcd:2379"
 fi
