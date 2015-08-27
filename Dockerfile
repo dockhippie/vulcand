@@ -2,8 +2,8 @@ FROM webhippie/alpine:latest
 MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
 ENV VULCAND_PATH github.com/mailgun/vulcand
-ENV VULCAND_REPO https://${VULCAND_PATH}.git
-ENV VULCAND_BRANCH master
+ENV VULCAND_REPO https://github.com/tboerger/vulcand.git
+ENV VULCAND_BRANCH feature/cmd-params
 
 ENV GOPATH /usr
 
