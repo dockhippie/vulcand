@@ -13,13 +13,15 @@ RUN apk update && \
     git \
     go && \
   git clone -b ${VULCAND_BRANCH} ${VULCAND_REPO} ${GOPATH}/src/${VULCAND_PATH} && \
-  go get ${VULCAND_PATH}/... && \
+  go get -d ${VULCAND_PATH}/... && \
   go install ${VULCAND_PATH} && \
   go install ${VULCAND_PATH}/vctl && \
   go install ${VULCAND_PATH}/vbundle && \
   apk del build-base git go && \
   rm -rf /var/cache/apk/* && \
-  rm -r /usr/src/*
+  rm -r \
+    /usr/src/* \
+    /usr/pkg/*
 
 ADD rootfs /
 EXPOSE 8181 8182
