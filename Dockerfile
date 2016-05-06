@@ -10,7 +10,7 @@ ENV GOPATH /usr:/usr/src/${VULCAND_PATH}/Godeps/_workspace
 RUN apk update && \
   apk add \
     build-base \
-    go@community \
+    go \
     git && \
   git clone -b ${VULCAND_BRANCH} ${VULCAND_REPO} /usr/src/${VULCAND_PATH} && \
   cd /usr/src/${VULCAND_PATH} && \
