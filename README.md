@@ -1,25 +1,24 @@
 # Vulcand
 
-[![](https://badge.imagelayers.io/webhippie/vulcand:latest.svg)](https://imagelayers.io/?images=webhippie/vulcand:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/webhippie/vulcand.svg)](https://microbadger.com/images/webhippie/vulcand "Get your own image badge on microbadger.com")
 
-These are docker images for [Vulcand](https://github.com/mailgun/vulcand) running on an
-[Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
-
-
-## Usage
-
-```bash
-docker run -ti \
-  --name vulcand \
-  webhippie/vulcand:latest
-```
+These are docker images for [Vulcand](https://github.com/mailgun/vulcand) running on an [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
 
 
 ## Versions
 
-* [latest](https://github.com/dockhippie/vulcand/tree/master)
-  available as ```webhippie/vulcand:latest``` at
-  [Docker Hub](https://registry.hub.docker.com/u/webhippie/vulcand/)
+* [latest](https://github.com/dockhippie/vulcand/tree/master) available as ```webhippie/vulcand:latest``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/vulcand/)
+
+
+## Volumes
+
+* None
+
+
+## Ports
+
+* 8181
+* 8182
 
 
 ## Available environment variables
@@ -51,14 +50,7 @@ ENV VULCAND_STATSD_PREFIX
 ## Inherited environment variables
 
 ```bash
-ENV LOGSTASH_ENABLED false
-ENV LOGSTASH_HOST logstash
-ENV LOGSTASH_PORT 5043
-ENV LOGSTASH_CA /etc/ssl/logstash/certs/ca.pem # As string or filename
-ENV LOGSTASH_CERT /etc/ssl/logstash/certs/cert.pem # As string or filename
-ENV LOGSTASH_KEY /etc/ssl/logstash/private/cert.pem # As string or filename
-ENV LOGSTASH_TIMEOUT 15
-ENV LOGSTASH_OPTS
+ENV CRON_ENABLED false
 ```
 
 
@@ -80,5 +72,5 @@ MIT
 ## Copyright
 
 ```
-Copyright (c) 2015 Thomas Boerger <http://www.webhippie.de>
+Copyright (c) 2015-2017 Thomas Boerger <http://www.webhippie.de>
 ```
