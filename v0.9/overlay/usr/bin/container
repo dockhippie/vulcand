@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -eo pipefail
+source /usr/bin/entrypoint
+
+for FILE in $(find /etc/container.d -type f -iname \*.sh | sort); do
+    source ${FILE}
+done
+
+pushd /var/lib/vulcand >/dev/null
+    STARTCMD="su-exec vulcand vulcand -interface=0.0.0.0 -port=8181 -apiInterface=0.0.0.0 -apiPort=8182 -log=console"
+
+    [[ -n "${VULCAND_LOG_SEVERITY}" ]] && STARTCMD="${STARTCMD} -logSeverity=${VULCAND_LOG_SEVERITY}"
+    [[ -n "${VULCAND_ALIASES}" ]] && STARTCMD="${STARTCMD} -aliases=${VULCAND_ALIASES}"
+    [[ -n "${VULCAND_CERTPATH}" ]] && STARTCMD="${STARTCMD} -certPath=${VULCAND_CERTPATH}"
+    [[ "${VULCAND_DEBUG_JAEGER_TRACING}" == "true" || "${VULCAND_DEBUG_JAEGER_TRACING}" == "1" ]] && STARTCMD="${STARTCMD} -debugJaegerTracing"
+    [[ "${VULCAND_DEFAULT_LISTENER}" == "true" || "${VULCAND_DEFAULT_LISTENER}" == "1" ]] && STARTCMD="${STARTCMD} -default-listener"
+    [[ "${VULCAND_ENABLE_JAEGER_TRACING}" == "true" || "${VULCAND_ENABLE_JAEGER_TRACING}" == "1" ]] && STARTCMD="${STARTCMD} -enableJaegerTracing"
+    [[ -n "${VULCAND_ENDPOINT_DIAL_TIMEOUT}" ]] && STARTCMD="${STARTCMD} -endpointDialTimeout=${VULCAND_ENDPOINT_DIAL_TIMEOUT}"
+    [[ -n "${VULCAND_ENDPOINT_READ_TIMEOUT}" ]] && STARTCMD="${STARTCMD} -endpointDialTimeout=${VULCAND_ENDPOINT_READ_TIMEOUT}"
+    [[ -n "${VULCAND_ENGINE}" ]] && STARTCMD="${STARTCMD} -engine=${VULCAND_ENGINE}"
+    [[ -n "${VULCAND_MEM_PROFILE_RATE}" ]] && STARTCMD="${STARTCMD} -memProfileRate=${VULCAND_MEM_PROFILE_RATE}"
+    [[ -n "${VULCAND_SEAL_KEY}" ]] && STARTCMD="${STARTCMD} -sealKey=${VULCAND_SEAL_KEY}"
+    [[ -n "${VULCAND_SERVER_MAX_HEADER_BYTES}" ]] && STARTCMD="${STARTCMD} -serverMaxHeaderBytes=${VULCAND_SERVER_MAX_HEADER_BYTES}"
+    [[ -n "${VULCAND_SERVER_READ_TIMEOUT}" ]] && STARTCMD="${STARTCMD} -serverReadTimeout=${VULCAND_SERVER_READ_TIMEOUT}"
+    [[ -n "${VULCAND_SERVER_WRITE_TIMEOUT}" ]] && STARTCMD="${STARTCMD} -serverWriteTimeout=${VULCAND_SERVER_WRITE_TIMEOUT}"
+    [[ -n "${VULCAND_STATSD_ADDR}" ]] && STARTCMD="${STARTCMD} -statsdAddr=${VULCAND_STATSD_ADDR}"
+    [[ -n "${VULCAND_STATSD_PREFIX}" ]] && STARTCMD="${STARTCMD} -statsdPrefix=${VULCAND_STATSD_PREFIX}"
+    [[ "${VULCAND_TRUST_FORWARD_HEADER}" == "true" || "${VULCAND_TRUST_FORWARD_HEADER}" == "1" ]] && STARTCMD="${STARTCMD} -trustForwardHeader"
+
+    if [[ "${VULCAND_ENGINE}" == "etcd" ]]; then
+        [[ -n "${VULCAND_ETCD}" ]] && STARTCMD="${STARTCMD} -etcd=${VULCAND_ETCD}"
+        [[ -n "${VULCAND_ETCD_API_VERSION}" ]] && STARTCMD="${STARTCMD} -etcdApiVer=${VULCAND_ETCD_API_VERSION}"
+        [[ -n "${VULCAND_ETCD_KEY}" ]] && STARTCMD="${STARTCMD} -etcdKey=${VULCAND_ETCD_KEY}"
+        [[ -n "${VULCAND_ETCD_SYNC_INTERVAL_SECONDS}" ]] && STARTCMD="${STARTCMD} -etcdSyncIntervalSeconds=${VULCAND_ETCD_SYNC_INTERVAL_SECONDS}"
+        [[ -n "${VULCAND_ETCD_CONSISTENCY}" ]] && STARTCMD="${STARTCMD} -etcdConsistency=${VULCAND_ETCD_CONSISTENCY}"
+        [[ "${VULCAND_ETCD_ENABLE_TLS}" == "true" || "${VULCAND_ETCD_ENABLE_TLS}" == "1" ]] && STARTCMD="${STARTCMD} -etcdEnableTLS"
+        [[ -n "${VULCAND_ETCD_CA_FILE}" ]] && STARTCMD="${STARTCMD} -etcdCaFile=${VULCAND_ETCD_CA_FILE}"
+        [[ -n "${VULCAND_ETCD_CERT_FILE}" ]] && STARTCMD="${STARTCMD} -etcdCertFile=${VULCAND_ETCD_CERT_FILE}"
+        [[ -n "${VULCAND_ETCD_KEY_FILE}" ]] && STARTCMD="${STARTCMD} -etcdKeyFile=${VULCAND_ETCD_KEY_FILE}"
+        [[ "${VULCAND_ETCD_INSECURE_SKIP_VERIFY}" == "true" || "${VULCAND_ETCD_INSECURE_SKIP_VERIFY}" == "1" ]] && STARTCMD="${STARTCMD} -etcdInsecureSkipVerify"
+        [[ -n "${VULCAND_ETCD_USERNAME}" ]] && STARTCMD="${STARTCMD} -etcdUsername=${VULCAND_ETCD_USERNAME}"
+        [[ -n "${VULCAND_ETCD_PASSWORD}" ]] && STARTCMD="${STARTCMD} -etcdPassword=${VULCAND_ETCD_PASSWORD}"
+        [[ "${VULCAND_ETCD_DEBUG}" == "true" || "${VULCAND_ETCD_DEBUG}" == "1" ]] && STARTCMD="${STARTCMD} -etcdDebug"
+    fi
+
+    echo "> starting vulcand service"
+    exec ${STARTCMD}
+popd >/dev/null

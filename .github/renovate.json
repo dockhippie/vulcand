@@ -3,5 +3,47 @@
     "extends": [
         "github>dockhippie/.github//renovate/preset"
     ],
-    "packageRules": []
+    "packageRules": [
+        {
+            "description": "Update golang docker images",
+            "datasources": [
+                "docker"
+            ],
+            "updateTypes": [
+                "major",
+                "minor"
+            ],
+            "enabled": true,
+            "automerge": true
+        },
+        {
+            "description": "Update tags without merge",
+            "datasources": [
+                "github-tags"
+            ],
+            "updateTypes": [
+                "major",
+                "minor"
+            ],
+            "enabled": false,
+            "automerge": false,
+            "matchPackageNames": [
+                "vulcand/vulcand"
+            ]
+        },
+        {
+            "description": "Update tags without merge",
+            "datasources": [
+                "github-tags"
+            ],
+            "updateTypes": [
+                "patch"
+            ],
+            "enabled": true,
+            "automerge": true,
+            "matchPackageNames": [
+                "vulcand/vulcand"
+            ]
+        }
+    ]
 }

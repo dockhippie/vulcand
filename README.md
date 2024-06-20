@@ -1,76 +1,86 @@
-# Vulcand
+# vulcand
 
-[![](https://images.microbadger.com/badges/image/webhippie/vulcand.svg)](https://microbadger.com/images/webhippie/vulcand "Get your own image badge on microbadger.com")
+[![Docker Build](https://github.com/dockhippie/vulcand/actions/workflows/docker.yml/badge.svg)](https://github.com/dockhippie/vulcand/actions/workflows/docker.yml) [![GitHub Repo](https://img.shields.io/badge/github-repo-yellowgreen)](https://github.com/dockhippie/vulcand)
 
-These are docker images for [Vulcand](https://github.com/mailgun/vulcand) running on an [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
-
+These are docker images for [Vulcand][upstream] running on our
+[Alpine Linux image][parent].
 
 ## Versions
 
-* [latest](https://github.com/dockhippie/vulcand/tree/master) available as ```webhippie/vulcand:latest``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/vulcand/)
-
+For the available versions please look at [Docker Hub][dockerhub] or
+[Quay][quayio] or check the existing folders within the
+[GitHub repository][github].
 
 ## Volumes
 
-* None
-
+*  None
 
 ## Ports
 
-* 8181
-* 8182
-
+*  8181
+*  8182
 
 ## Available environment variables
 
-```bash
-ENV VULCAND_API_INTERFACE
-ENV VULCAND_CERTPATH # As string or filename
-ENV VULCAND_ENDPOINT_DIALTIMEOUT 5s
-ENV VULCAND_ENDPOINT_READTIMEOUT 50s
-ENV VULCAND_ETCD
-ENV VULCAND_ETCD_CAFILE # As string or filename
-ENV VULCAND_ETCD_CERTFILE # As string or filename
-ENV VULCAND_ETCD_KEYFILE # As string or filename
-ENV VULCAND_ETCD_CONSISTENCY STRONG
-ENV VULCAND_ETCD_KEY vulcand
-ENV VULCAND_INTERFACE
-ENV VULCAND_LOG console
-ENV VULCAND_LOG_SEVERITY WARN
-ENV VULCAND_READTIMEOUT 1m0s
-ENV VULCAND_SEALKEY
-ENV VULCAND_SERVER_MAXHEADERBYTES 1048576
-ENV VULCAND_SERVER_READTIMEOUT 1m0s
-ENV VULCAND_SERVER_WRITETIMEOUT 1m0s
-ENV VULCAND_STATSD_ADDR
-ENV VULCAND_STATSD_PREFIX
+```console
+VULCAND_ALIASES =
+VULCAND_CERTPATH =
+VULCAND_DEBUG_JAEGER_TRACING = false
+VULCAND_DEFAULT_LISTENER = true
+VULCAND_ENABLE_JAEGER_TRACING = false
+VULCAND_ENDPOINT_DIAL_TIMEOUT =
+VULCAND_ENDPOINT_READ_TIMEOUT =
+VULCAND_ENGINE = etcd
+VULCAND_ETCD = http://etcd:2379
+VULCAND_ETCD_API_VERSION = 3
+VULCAND_ETCD_CA_FILE =
+VULCAND_ETCD_CERT_FILE =
+VULCAND_ETCD_CONSISTENCY = STRONG
+VULCAND_ETCD_DEBUG = false
+VULCAND_ETCD_ENABLE_TLS = false
+VULCAND_ETCD_INSECURE_SKIP_VERIFY = false
+VULCAND_ETCD_KEY = vulcand
+VULCAND_ETCD_KEY_FILE =
+VULCAND_ETCD_PASSWORD =
+VULCAND_ETCD_SYNC_INTERVAL_SECONDS =
+VULCAND_ETCD_USERNAME =
+VULCAND_HEALTHCHECK_CODE = 200
+VULCAND_HEALTHCHECK_URL = http://localhost:8182/v2/status
+VULCAND_LOG_SEVERITY = warning
+VULCAND_MEM_PROFILE_RATE =
+VULCAND_SEAL_KEY =
+VULCAND_SERVER_MAX_HEADER_BYTES =
+VULCAND_SERVER_READ_TIMEOUT =
+VULCAND_SERVER_WRITE_TIMEOUT =
+VULCAND_STATSD_ADDR =
+VULCAND_STATSD_PREFIX =
+VULCAND_TRUST_FORWARD_HEADER = false
 ```
-
 
 ## Inherited environment variables
 
-```bash
-ENV CRON_ENABLED false
-```
-
+*  [webhippie/alpine](https://github.com/dockhippie/alpine#available-environment-variables)
 
 ## Contributing
 
 Fork -> Patch -> Push -> Pull Request
 
-
 ## Authors
 
-* [Thomas Boerger](https://github.com/tboerger)
-
+*  [Thomas Boerger](https://github.com/tboerger)
 
 ## License
 
 MIT
 
-
 ## Copyright
 
+```console
+Copyright (c) 2015 Thomas Boerger <http://www.webhippie.de>
 ```
-Copyright (c) 2015-2017 Thomas Boerger <http://www.webhippie.de>
-```
+
+[upstream]: https://github.com/vulcand/vulcand
+[parent]: https://github.com/dockhippie/alpine
+[dockerhub]: https://hub.docker.com/r/webhippie/vulcand/tags
+[quayio]: https://quay.io/repository/webhippie/vulcand?tab=tags
+[github]: https://github.com/dockhippie/vulcand

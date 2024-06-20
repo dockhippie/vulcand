@@ -1,6 +1,7 @@
+---
 repository:
   name: vulcand
-  description: Docker images for Vulcand
+  description: Docker images for vulcand
   topics: docker, image
 
   private: false

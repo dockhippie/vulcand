@@ -1,0 +1,28 @@
+FROM ghcr.io/dockhippie/golang:1.21-arm@sha256:eb3fc0fcc12bdfdcdb2aa08d5355e82d15e88b9d8105f9c5905b719936a606a3 AS build
+
+# renovate: datasource=github-tags depName=vulcand/vulcand
+ENV VULCAND_VERSION=v0.9.2
+
+RUN git clone -b ${VULCAND_VERSION} https://github.com/vulcand/vulcand.git /srv/app/src && \
+  cd /srv/app/src && \
+  GO111MODULE=on go install ./...
+
+FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:ae98e7d8c378250ff7799a4aa80dba4ebf9ef9874c51f304cb5006318bb21b48
+
+EXPOSE 8181 8182
+
+WORKDIR /var/lib/vulcand
+CMD ["/usr/bin/container"]
+
+RUN apk update && \
+  apk upgrade && \
+  apk add etcd-ctl@testing && \
+  mkdir -p /var/lib/vulcand && \
+  groupadd -g 1000 vulcand && \
+  useradd -u 1000 -d /var/lib/vulcand -g vulcand -s /bin/bash -M vulcand && \
+  rm -rf /var/cache/apk/*
+
+COPY --from=build /srv/app/bin/vulcand /usr/bin/vulcand
+COPY --from=build /srv/app/bin/vctl /usr/bin/vctl
+COPY --from=build /srv/app/bin/vbundle /usr/bin/vbundle
+COPY ./overlay /
