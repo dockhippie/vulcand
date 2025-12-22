@@ -1,4 +1,4 @@
-FROM ghcr.io/dockhippie/golang:1.25-arm@sha256:78b1b079b6cf7f3a6130ee1d8840dd50d6fee369f4466826e63537cca6d7093a AS build
+FROM ghcr.io/dockhippie/golang:1.25-arm@sha256:f9c293f227f478bec852d0c993752cb3fd344e273fb0431d7183b64ffe30d69f AS build
 
 # renovate: datasource=github-tags depName=vulcand/vulcand
 ENV VULCAND_VERSION=v0.9.2
@@ -7,7 +7,7 @@ RUN git clone -b ${VULCAND_VERSION} https://github.com/vulcand/vulcand.git /srv/
   cd /srv/app/src && \
   GO111MODULE=on go install ./...
 
-FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:f28b526efe69cefcd3e3ea69476240b4b8433d2612b42f9f09874ba4e32b49a0
+FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:ed2086064b6d9258c7371e1de328006553a2434b565477a39204e62cbff829f7
 
 EXPOSE 8181 8182
 
