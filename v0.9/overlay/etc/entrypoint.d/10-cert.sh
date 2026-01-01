@@ -33,5 +33,3 @@ if [ -n "${VULCAND_ETCD_KEY_FILE}" ]; then
 
     ETCDCTL_COMMAND="${ETCDCTL_COMMAND} --key=${VULCAND_ETCD_KEY_FILE}"
 fi
-
-true
