@@ -7,7 +7,7 @@ RUN git clone -b ${VULCAND_VERSION} https://github.com/vulcand/vulcand.git /srv/
   cd /srv/app/src && \
   GO111MODULE=on go install ./...
 
-FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:f45d8fa8c34c558cd174c97e04aab4d30dfa9dc3cdf6b3f5d8a100cf869feb15
+FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:a52c0346973041254cc713a183abec13cc14365192d7d9b00fb400710ba5579d
 
 EXPOSE 8181 8182
 
