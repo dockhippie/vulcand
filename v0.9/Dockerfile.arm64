@@ -1,4 +1,4 @@
-FROM ghcr.io/dockhippie/golang:1.25-arm64@sha256:41492ec96cd3ef7e12303db0db122ad4e7e2062093e74b6ece35ac93c2fce4cc AS build
+FROM ghcr.io/dockhippie/golang:1.25-arm64@sha256:fb8358f65c8d93a7a18360dbece31ca032871ec75653ae03cbfa51edadb42279 AS build
 
 # renovate: datasource=github-tags depName=vulcand/vulcand
 ENV VULCAND_VERSION=v0.9.2
