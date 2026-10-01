@@ -1,4 +1,4 @@
-FROM ghcr.io/dockhippie/golang:1.26-amd64@sha256:7cf4f363d18c06d3becc79807ca0f12f4c5283ecda4feddbda6ea03d86ecd083 AS build
+FROM ghcr.io/dockhippie/golang:1.27-amd64@sha256:dc9d01181e846d553f8ebe9421be6da8ae4140f60ead3d088966dbdebde90a2f AS build
 
 RUN git clone -b master https://github.com/vulcand/vulcand.git /srv/app/src && \
   cd /srv/app/src && \
